@@ -3,7 +3,16 @@
            https://api.github.com/users/<your name>
 */
 
-axios.get('https://api.github.com/users/adamwinzdesign')
+axios
+  .get('https://api.github.com/users/adamwinzdesign')
+  .then(response => {
+    console.log(response);
+      const newCard = createCard(response.data);
+      cards.appendChild(newCard);
+    })
+  .catch(error => {
+    console.log("The data was not returned", error);
+  });
 
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
@@ -26,11 +35,12 @@ axios.get('https://api.github.com/users/adamwinzdesign')
           user, and adding that card to the DOM.
 */
 
-const followersArray = [theolamide, sjeremich23, donutwizard666, viewgo, jaytee-padilla];
+const followersArray = ['theolamide', 'sjeremich23', 'donutwizard666', 'viewgo', 'jaytee-padilla'];
+
+const cards = document.querySelector('.cards');
 
 function createCard(obj) {
   // create HTML elements
-  const userCard = document.createElement('div');
   const userImg = document.createElement('img');
   const cardInfo = document.createElement('div');
   const userName = document.createElement('h3');
@@ -43,29 +53,35 @@ function createCard(obj) {
   const userBio = document.createElement('p');
 
   // append new HTML to existing
-  const cards = document.querySelector('.cards');
-  cards.appendChild(userCard);
-  userCard.appendChild(userImg);
-  userCard.appendChild(cardInfo);
+  cards.appendChild(userImg);
+  cards.appendChild(cardInfo);
   cardInfo.appendChild(userName);
   cardInfo.appendChild(gitUserName);
   cardInfo.appendChild(userLocation);
   cardInfo.appendChild(userProfile);
-  userProfile.appendChild(userLink);
+  cardInfo.appendChild(userLink);
   cardInfo.appendChild(userFollowers);
   cardInfo.appendChild(userFollowing);
   cardInfo.appendChild(userBio);
 
   // set class names
-  userCard.classList.add('card');
   cardInfo.classList.add('card-info');
   userName.classList.add('name');
   gitUserName.classList.add('username');
 
   // set text content
+  userImg.src = obj.avatar_url,
+  userName.textContent = obj.name,
+  gitUserName.textContent = obj.login,
+  userLocation.textContent = obj.location,
+  userLink.textContent = obj.html_url,
+  userFollowers.textContent = obj.followers,
+  userFollowing.textContent = obj.following
 
-  return cards;
+  return cardInfo;
 };
+
+// createCard(adamProfile);
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:

@@ -65,18 +65,19 @@ function createCard(obj) {
   cardInfo.appendChild(userBio);
 
   // set class names
+  cards.classList.add('card')
   cardInfo.classList.add('card-info');
   userName.classList.add('name');
   gitUserName.classList.add('username');
 
   // set text content
   userImg.src = obj.avatar_url,
-  userName.textContent = obj.name,
-  gitUserName.textContent = obj.login,
-  userLocation.textContent = obj.location,
-  userLink.textContent = obj.html_url,
-  userFollowers.textContent = obj.followers,
-  userFollowing.textContent = obj.following
+  userName.textContent = `Name: ${obj.name}`,
+  gitUserName.textContent = `Git User Name: ${obj.login}`,
+  userLocation.textContent = `Location: ${obj.location}`,
+  userLink.textContent = `Git URL: ${obj.html_url}`,
+  userFollowers.textContent = `Followers: ${obj.followers}`,
+  userFollowing.textContent = `Following: ${obj.following}`
 
   return cardInfo;
 };

@@ -3,6 +3,10 @@
            https://api.github.com/users/<your name>
 */
 
+const followersArray = ['falmatad', 'theolamide', 'sjeremich23', 'donutwizard666', 'viewgo', 'jaytee-padilla'];
+
+const cards = document.querySelector('.cards');
+
 axios
   .get('https://api.github.com/users/adamwinzdesign')
   .then(response => {
@@ -13,6 +17,20 @@ axios
   .catch(error => {
     console.log("The data was not returned", error);
   });
+
+followersArray.forEach(function(e) {
+  console.log(e)
+  axios
+  .get(`https://api.github.com/users/${e}`)
+  .then(response => {
+    console.log(response);
+      const newCard = createCard(response.data);
+      cards.appendChild(newCard);
+    })
+  .catch(error => {
+    console.log("The data was not returned", error);
+  });
+});
 
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
@@ -34,10 +52,6 @@ axios
           Using that array, iterate over it, requesting data for each user, creating a new card for each
           user, and adding that card to the DOM.
 */
-
-const followersArray = ['theolamide', 'sjeremich23', 'donutwizard666', 'viewgo', 'jaytee-padilla'];
-
-const cards = document.querySelector('.cards');
 
 function createCard(obj) {
   // create HTML elements

@@ -34,12 +34,37 @@ function createCard(obj) {
   const userImg = document.createElement('img');
   const cardInfo = document.createElement('div');
   const userName = document.createElement('h3');
+  const gitUserName = document.createElement('p');
   const userLocation = document.createElement('p');
   const userProfile = document.createElement('p');
   const userLink = document.createElement('a');
   const userFollowers = document.createElement('p');
   const userFollowing = document.createElement('p');
   const userBio = document.createElement('p');
+
+  // append new HTML to existing
+  const cards = document.querySelector('.cards');
+  cards.appendChild(userCard);
+  userCard.appendChild(userImg);
+  userCard.appendChild(cardInfo);
+  cardInfo.appendChild(userName);
+  cardInfo.appendChild(gitUserName);
+  cardInfo.appendChild(userLocation);
+  cardInfo.appendChild(userProfile);
+  userProfile.appendChild(userLink);
+  cardInfo.appendChild(userFollowers);
+  cardInfo.appendChild(userFollowing);
+  cardInfo.appendChild(userBio);
+
+  // set class names
+  userCard.classList.add('card');
+  cardInfo.classList.add('card-info');
+  userName.classList.add('name');
+  gitUserName.classList.add('username');
+
+  // set text content
+
+  return cards;
 };
 
 /* Step 3: Create a function that accepts a single object as its only argument,
